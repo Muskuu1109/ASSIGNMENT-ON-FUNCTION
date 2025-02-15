@@ -1,0 +1,608 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN67ymohXA1CIvXZnOa6BDR",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Muskuu1109/ASSIGNMENT-ON-FUNCTION/blob/main/STATISTICS%20ADVANCE%201\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**1. Explain the properties of the F-distribution.**\n",
+        "\n",
+        "The F-distribution is a continuous probability distribution commonly used in statistical hypothesis testing, particularly in analysis of variance (ANOVA), regression analysis, and comparing variances (F-test).\n",
+        "\n",
+        "### **Properties of the F-Distribution (Point-Wise)**  \n",
+        "1. **Definition**: Ratio of two independent chi-square distributed variables normalized by their degrees of freedom.  \n",
+        "2. **Non-Negative**: \\( F \\geq 0 \\), as it is based on variances.  \n",
+        "3. **Right-Skewed**: Skewed to the right, becoming more symmetric as degrees of freedom increase.  \n",
+        "4. **Degrees of Freedom**: Defined by two parameters: \\( d_1 \\) (numerator) and \\( d_2 \\) (denominator).  \n",
+        "5. **Mean**: Exists for \\( d_2 > 2 \\), given by \\( E[F] = \\frac{d_2}{d_2 - 2} \\).  \n",
+        "6. **Variance**: Exists for \\( d_2 > 4 \\), given by  \n",
+        "   \\[\n",
+        "   \\text{Var}(F) = \\frac{2 d_2^2 (d_1 + d_2 - 2)}{d_1 (d_2 - 2)^2 (d_2 - 4)}\n",
+        "   \\]  \n",
+        "7. **Asymptotic Normality**: Approaches normality as \\( d_1 \\) and \\( d_2 \\) increase.  \n",
+        "8. **Used for Hypothesis Testing**: Key in **ANOVA, regression analysis, and variance comparison (F-test)**.  "
+      ],
+      "metadata": {
+        "id": "esYatLy8kCin"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**2.In which types of statistical tests is the F-distribution used, and why is it appropriate for these tests?**\n",
+        "\n",
+        "### **Statistical Tests Using the F-Distribution & Its Appropriateness**  \n",
+        "\n",
+        "The **F-distribution** is primarily used in statistical tests where we compare variances or multiple group means. Below are the main tests that rely on it:  \n",
+        "\n",
+        "1. Analysis of Variance (ANOVA)\n",
+        " Compares the means of three or more groups to determine if they are significantly different.  \n",
+        "\n",
+        " The test statistic is the ratio of **between-group variance** to **within-group variance**, both of which follow a chi-square distribution.  Since the F-distribution models variance ratios, it is the ideal choice.  \n",
+        "\n",
+        "2. Regression Analysis (Overall Model Significance Test)\n",
+        "Determines whether at least one independent variable significantly predicts the dependent variable in a regression model.  \n",
+        "  - The F-distribution test compares the **explained variance** (regression sum of squares) to the **unexplained variance** (residual sum of squares).  \n",
+        "  - The F-statistic follows an F-distribution when testing whether all regression coefficients (except the intercept) are zero.  \n",
+        "\n",
+        "3. Comparing Two Population Variances (F-Test for Variance Comparison)\n",
+        " Tests whether two populations have equal variances.  \n",
+        " The test statistic is the ratio of two sample variances, which follows an F-distribution under the null hypothesis.  \n",
+        "\n",
+        "4. Lack of Fit Test in Regression\n",
+        " checks whether a given regression model adequately fits the data.F-distribution compares the variance due to lack of fit with the variance due to pure error using an F-statistic.  \n",
+        "\n",
+        "5. MANOVA (Multivariate Analysis of Variance) & ANCOVA (Analysis of Covariance)\n",
+        "  - **MANOVA**: Extends ANOVA to multiple dependent variables.  \n",
+        "  - **ANCOVA**: Adjusts group means for covariates before comparing them.  \n",
+        " Both tests use variance-based comparisons, making the F-distribution appropriate.  \n",
+        "\n",
+        "Why is the F-Distribution Appropriate is appropriate because:\n",
+        "- **Compares Variances**: Since variance follows a chi-square distribution, their ratio naturally follows an F-distribution.  \n",
+        "- **Used for Multiple Group Comparisons**: Especially when dealing with multiple means or explanatory variables.  \n",
+        "- **Right-Skewed**: Matches the expected shape of variance-based ratios.  \n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "UU2xD1O8k4ox"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**3. What are the key assumptions required for conducting an F-test to compare the variances of two populations?**\n",
+        "\n",
+        "1. **Independence** – The two samples must be **independent** of each other.  \n",
+        "2. **Normality** – Both populations should be **normally distributed**. The F-test is sensitive to deviations from normality.  \n",
+        "3. **Random Sampling** – The data should be collected through **random sampling** to ensure validity.  \n",
+        "4. **Ratio of Variances** – The test statistic is calculated as the ratio of sample variances:  \n",
+        "   \\[\n",
+        "   F = \\frac{S_1^2}{S_2^2}\n",
+        "   \\]\n",
+        "   The larger variance should be placed in the numerator to ensure a **right-tailed** test.  \n",
+        "5. **Non-Negativity** – Variances are always **positive**, so the F-statistic is non-negative.  \n",
+        "\n",
+        "Would you like a Python implementation to verify these assumptions? 😊"
+      ],
+      "metadata": {
+        "id": "Gu41fPeNqOv8"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "import scipy.stats as stats\n",
+        "\n",
+        "# Function to check F-test assumptions\n",
+        "def check_f_test_assumptions(sample1, sample2):\n",
+        "    # Check normality using Shapiro-Wilk test\n",
+        "    normality1 = stats.shapiro(sample1).pvalue > 0.05\n",
+        "    normality2 = stats.shapiro(sample2).pvalue > 0.05\n",
+        "\n",
+        "    # Check independence (assumed if data is randomly collected)\n",
+        "    independence = True  # This assumption must be ensured during data collection\n",
+        "\n",
+        "    return normality1, normality2, independence\n",
+        "\n",
+        "# Example 1: ANOVA (Comparing Means of Three Groups)\n",
+        "group1 = [23, 25, 27, 30, 22]\n",
+        "group2 = [35, 37, 36, 40, 38]\n",
+        "group3 = [20, 21, 19, 23, 22]\n",
+        "\n",
+        "f_stat, p_value = stats.f_oneway(group1, group2, group3)\n",
+        "print(f\"ANOVA Test: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 2: F-Test for Variance Comparison (Two Populations)\n",
+        "sample1 = np.random.normal(50, 10, 30)\n",
+        "sample2 = np.random.normal(50, 15, 30)\n",
+        "\n",
+        "# Check assumptions\n",
+        "normality1, normality2, independence = check_f_test_assumptions(sample1, sample2)\n",
+        "print(f\"Assumption Check: Normality Sample1 = {normality1}, Normality Sample2 = {normality2}, Independence Assumed = {independence}\")\n",
+        "\n",
+        "var1 = np.var(sample1, ddof=1)\n",
+        "var2 = np.var(sample2, ddof=1)\n",
+        "\n",
+        "f_stat = var1 / var2\n",
+        "df1, df2 = len(sample1) - 1, len(sample2) - 1\n",
+        "p_value = 1 - stats.f.cdf(f_stat, df1, df2)\n",
+        "\n",
+        "print(f\"F-Test: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 3: Regression Model Significance\n",
+        "np.random.seed(42)\n",
+        "x = np.random.rand(50)\n",
+        "y = 3 * x + np.random.randn(50) * 0.2\n",
+        "slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)\n",
+        "\n",
+        "print(f\"Regression Test: Slope = {slope:.4f}, p-value = {p_value:.4f}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "EXKnbS9Qq6O-",
+        "outputId": "a76ebaaa-c0cf-4e3d-fc7e-13d480d4e2d6"
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "ANOVA Test: F-statistic = 63.7939, p-value = 0.0000\n",
+            "Assumption Check: Normality Sample1 = True, Normality Sample2 = True, Independence Assumed = True\n",
+            "F-Test: F-statistic = 0.3686, p-value = 0.9955\n",
+            "Regression Test: Slope = 2.9553, p-value = 0.0000\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**4. What is the purpose of ANOVA, and how does it differ from a t-test?**\n",
+        "\n",
+        "Purpose of ANOVA (Analysis of Variance)\n",
+        "- ANOVA is used to compare the means of **three or more** groups to determine if at least one group mean is significantly different.  \n",
+        "- It analyzes the **variance** within and between groups to test for statistical significance.  \n",
+        "- Commonly used in experiments and research studies to compare multiple treatments or conditions.  \n",
+        "\n",
+        "### **Difference Between ANOVA and t-test**  \n",
+        "\n",
+        "ANOVA (**Analysis of Variance**) is used when comparing the means of **three or more groups** to determine if at least one group mean is significantly different. It evaluates the **variance** within and between groups using the **F-statistic**. In contrast, a **t-test** is used when comparing the means of **two groups**, testing whether they are significantly different using the **t-statistic**. While ANOVA considers variance across multiple groups, a t-test directly compares means. If only two groups are involved, a **t-test** is sufficient, but for **three or more groups**, **ANOVA** is required to avoid inflating the Type I error rate.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "WQJzGALEr29d"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**5. Explain when and why you would use a one-way ANOVA instead of multiple t-tests when comparing more than two group.**\n",
+        "\n",
+        "When to Use One-Way ANOVA:\n",
+        "- When comparing three or more independent groups.  \n",
+        "- When the dependent variable is continuous , and the groups are categorical.  \n",
+        "- When assumptions of normality and homogeneity of variance are met.  \n",
+        "\n",
+        "Why do we use One-Way ANOVA Instead of Multiple t-Tests\n",
+        "1. **Controls Type I Error (False Positives)** – Conducting multiple t-tests increases the risk of incorrectly rejecting the null hypothesis (Type I error). One-way ANOVA controls this by testing all group differences in a single test.  \n",
+        "2. **More Efficient** – Instead of running multiple t-tests, ANOVA provides a single test to determine if there is a significant difference among groups.  \n",
+        "3. **Compares All Groups Simultaneously** – ANOVA considers all group variances together, giving a broader picture of differences rather than just pairwise comparisons.  \n",
+        "4. **Leads to Further Post Hoc Analysis** – If ANOVA detects a significant difference, post hoc tests (e.g., Tukey’s HSD) can determine which specific groups  differ without inflating errors.  "
+      ],
+      "metadata": {
+        "id": "DYLqww-MtOiB"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "import scipy.stats as stats\n",
+        "\n",
+        "# Function to check F-test assumptions\n",
+        "def check_f_test_assumptions(sample1, sample2):\n",
+        "    # Check normality using Shapiro-Wilk test\n",
+        "    normality1 = stats.shapiro(sample1).pvalue > 0.05\n",
+        "    normality2 = stats.shapiro(sample2).pvalue > 0.05\n",
+        "\n",
+        "    # Check independence (assumed if data is randomly collected)\n",
+        "    independence = True  # This assumption must be ensured during data collection\n",
+        "\n",
+        "    return normality1, normality2, independence\n",
+        "\n",
+        "# Example 1: ANOVA (Comparing Means of Three Groups)\n",
+        "group1 = [23, 25, 27, 30, 22]\n",
+        "group2 = [35, 37, 36, 40, 38]\n",
+        "group3 = [20, 21, 19, 23, 22]\n",
+        "\n",
+        "f_stat, p_value = stats.f_oneway(group1, group2, group3)\n",
+        "print(f\"ANOVA Test: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 2: F-Test for Variance Comparison (Two Populations)\n",
+        "sample1 = np.random.normal(50, 10, 30)\n",
+        "sample2 = np.random.normal(50, 15, 30)\n",
+        "\n",
+        "# Check assumptions\n",
+        "normality1, normality2, independence = check_f_test_assumptions(sample1, sample2)\n",
+        "print(f\"Assumption Check: Normality Sample1 = {normality1}, Normality Sample2 = {normality2}, Independence Assumed = {independence}\")\n",
+        "\n",
+        "var1 = np.var(sample1, ddof=1)\n",
+        "var2 = np.var(sample2, ddof=1)\n",
+        "\n",
+        "f_stat = var1 / var2\n",
+        "df1, df2 = len(sample1) - 1, len(sample2) - 1\n",
+        "p_value = 1 - stats.f.cdf(f_stat, df1, df2)\n",
+        "\n",
+        "print(f\"F-Test: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 3: Regression Model Significance\n",
+        "np.random.seed(42)\n",
+        "x = np.random.rand(50)\n",
+        "y = 3 * x + np.random.randn(50) * 0.2\n",
+        "slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)\n",
+        "\n",
+        "print(f\"Regression Test: Slope = {slope:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 4: One-Way ANOVA vs Multiple t-tests\n",
+        "groupA = np.random.normal(50, 5, 30)\n",
+        "groupB = np.random.normal(55, 5, 30)\n",
+        "groupC = np.random.normal(60, 5, 30)\n",
+        "\n",
+        "t_stat_AB, p_val_AB = stats.ttest_ind(groupA, groupB)\n",
+        "t_stat_AC, p_val_AC = stats.ttest_ind(groupA, groupC)\n",
+        "t_stat_BC, p_val_BC = stats.ttest_ind(groupB, groupC)\n",
+        "\n",
+        "print(f\"t-test A vs B: t-statistic = {t_stat_AB:.4f}, p-value = {p_val_AB:.4f}\")\n",
+        "print(f\"t-test A vs C: t-statistic = {t_stat_AC:.4f}, p-value = {p_val_AC:.4f}\")\n",
+        "print(f\"t-test B vs C: t-statistic = {t_stat_BC:.4f}, p-value = {p_val_BC:.4f}\")\n",
+        "\n",
+        "f_stat, p_value = stats.f_oneway(groupA, groupB, groupC)\n",
+        "print(f\"One-Way ANOVA: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "heQeBQZQu7_G",
+        "outputId": "7b480962-4e72-4989-c74c-15aa1829058b"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "ANOVA Test: F-statistic = 63.7939, p-value = 0.0000\n",
+            "Assumption Check: Normality Sample1 = False, Normality Sample2 = True, Independence Assumed = True\n",
+            "F-Test: F-statistic = 0.4576, p-value = 0.9804\n",
+            "Regression Test: Slope = 2.9553, p-value = 0.0000\n",
+            "t-test A vs B: t-statistic = -3.7013, p-value = 0.0005\n",
+            "t-test A vs C: t-statistic = -9.5919, p-value = 0.0000\n",
+            "t-test B vs C: t-statistic = -5.3932, p-value = 0.0000\n",
+            "One-Way ANOVA: F-statistic = 43.4408, p-value = 0.0000\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**6. Explain how variance is partitioned in ANOVA into between-group variance and within-group variance.How does this partitioning contribute to the calculation of the F-statistic?**\n",
+        "\n",
+        "In ANOVA, the total variance in the data is divided into two components:  \n",
+        "\n",
+        "1. **Between-Group Variance (Explained Variance)**  \n",
+        "   - Measures the variation **between** different group means.  \n",
+        "   - Captures how much the group means differ from the overall mean.  \n",
+        "   - Represents variability due to the effect of the independent variable (treatment or condition).  \n",
+        "\n",
+        "2. **Within-Group Variance (Unexplained Variance)**  \n",
+        "   - Measures the variation **within** each group.  \n",
+        "   - Represents random variation or individual differences that are **not** due to the independent variable.  \n",
+        "\n",
+        "Contribution to the F-Statistic Calculation\n",
+        "\n",
+        "The **F-statistic** in ANOVA is calculated as the ratio of between-group variance to within-group variance:\n",
+        "\n",
+        "\\[\n",
+        "F = \\frac{\\text{Between-Group Variance}}{\\text{Within-Group Variance}}\n",
+        "\\]\n",
+        "\n",
+        "- A **higher F-value** suggests that the differences between groups are larger than the variation within groups, indicating a significant effect of the independent variable.  \n",
+        "- A **lower F-value** suggests that the differences between groups are small compared to within-group variation, meaning no significant effect."
+      ],
+      "metadata": {
+        "id": "ifV0IvoKvc6z"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "import scipy.stats as stats\n",
+        "\n",
+        "# Function to check F-test assumptions\n",
+        "def check_f_test_assumptions(sample1, sample2):\n",
+        "    # Check normality using Shapiro-Wilk test\n",
+        "    normality1 = stats.shapiro(sample1).pvalue > 0.05\n",
+        "    normality2 = stats.shapiro(sample2).pvalue > 0.05\n",
+        "\n",
+        "    # Check independence (assumed if data is randomly collected)\n",
+        "    independence = True  # This assumption must be ensured during data collection\n",
+        "\n",
+        "    return normality1, normality2, independence\n",
+        "\n",
+        "# Example 1: ANOVA (Comparing Means of Three Groups)\n",
+        "group1 = [23, 25, 27, 30, 22]\n",
+        "group2 = [35, 37, 36, 40, 38]\n",
+        "group3 = [20, 21, 19, 23, 22]\n",
+        "\n",
+        "f_stat, p_value = stats.f_oneway(group1, group2, group3)\n",
+        "print(f\"ANOVA Test: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 2: F-Test for Variance Comparison (Two Populations)\n",
+        "sample1 = np.random.normal(50, 10, 30)\n",
+        "sample2 = np.random.normal(50, 15, 30)\n",
+        "\n",
+        "# Check assumptions\n",
+        "normality1, normality2, independence = check_f_test_assumptions(sample1, sample2)\n",
+        "print(f\"Assumption Check: Normality Sample1 = {normality1}, Normality Sample2 = {normality2}, Independence Assumed = {independence}\")\n",
+        "\n",
+        "var1 = np.var(sample1, ddof=1)\n",
+        "var2 = np.var(sample2, ddof=1)\n",
+        "\n",
+        "f_stat = var1 / var2\n",
+        "df1, df2 = len(sample1) - 1, len(sample2) - 1\n",
+        "p_value = 1 - stats.f.cdf(f_stat, df1, df2)\n",
+        "\n",
+        "print(f\"F-Test: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 3: Regression Model Significance\n",
+        "np.random.seed(42)\n",
+        "x = np.random.rand(50)\n",
+        "y = 3 * x + np.random.randn(50) * 0.2\n",
+        "slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)\n",
+        "\n",
+        "print(f\"Regression Test: Slope = {slope:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 4: One-Way ANOVA vs Multiple t-tests\n",
+        "groupA = np.random.normal(50, 5, 30)\n",
+        "groupB = np.random.normal(55, 5, 30)\n",
+        "groupC = np.random.normal(60, 5, 30)\n",
+        "\n",
+        "t_stat_AB, p_val_AB = stats.ttest_ind(groupA, groupB)\n",
+        "t_stat_AC, p_val_AC = stats.ttest_ind(groupA, groupC)\n",
+        "t_stat_BC, p_val_BC = stats.ttest_ind(groupB, groupC)\n",
+        "\n",
+        "print(f\"t-test A vs B: t-statistic = {t_stat_AB:.4f}, p-value = {p_val_AB:.4f}\")\n",
+        "print(f\"t-test A vs C: t-statistic = {t_stat_AC:.4f}, p-value = {p_val_AC:.4f}\")\n",
+        "print(f\"t-test B vs C: t-statistic = {t_stat_BC:.4f}, p-value = {p_val_BC:.4f}\")\n",
+        "\n",
+        "f_stat, p_value = stats.f_oneway(groupA, groupB, groupC)\n",
+        "print(f\"One-Way ANOVA: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 5: ANOVA with Four Groups\n",
+        "groupX = np.random.normal(45, 4, 25)\n",
+        "groupY = np.random.normal(50, 4, 25)\n",
+        "groupZ = np.random.normal(55, 4, 25)\n",
+        "groupW = np.random.normal(60, 4, 25)\n",
+        "\n",
+        "f_stat, p_value = stats.f_oneway(groupX, groupY, groupZ, groupW)\n",
+        "print(f\"ANOVA Test with Four Groups: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n",
+        "\n",
+        "# Example 6: Variance Partitioning in ANOVA\n",
+        "def calculate_variance_partitioning(groups):\n",
+        "    all_data = np.concatenate(groups)\n",
+        "    overall_mean = np.mean(all_data)\n",
+        "\n",
+        "    # Between-group variance\n",
+        "    ss_between = sum(len(group) * (np.mean(group) - overall_mean) ** 2 for group in groups)\n",
+        "    df_between = len(groups) - 1\n",
+        "    ms_between = ss_between / df_between\n",
+        "\n",
+        "    # Within-group variance\n",
+        "    ss_within = sum(sum((x - np.mean(group)) ** 2 for x in group) for group in groups)\n",
+        "    df_within = sum(len(group) - 1 for group in groups)\n",
+        "    ms_within = ss_within / df_within\n",
+        "\n",
+        "    # F-statistic calculation\n",
+        "    f_stat = ms_between / ms_within\n",
+        "    p_value = 1 - stats.f.cdf(f_stat, df_between, df_within)\n",
+        "\n",
+        "    return f_stat, p_value\n",
+        "\n",
+        "# Generate sample data for three groups\n",
+        "group1 = np.random.normal(50, 5, 20)\n",
+        "group2 = np.random.normal(55, 5, 20)\n",
+        "group3 = np.random.normal(60, 5, 20)\n",
+        "\n",
+        "f_stat, p_value = calculate_variance_partitioning([group1, group2, group3])\n",
+        "print(f\"Variance Partitioning ANOVA: F-statistic = {f_stat:.4f}, p-value = {p_value:.4f}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QgfGirGNwaH7",
+        "outputId": "35dec694-8e2d-457c-f5b1-1719b45c4aa4"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "ANOVA Test: F-statistic = 63.7939, p-value = 0.0000\n",
+            "Assumption Check: Normality Sample1 = False, Normality Sample2 = True, Independence Assumed = True\n",
+            "F-Test: F-statistic = 0.4576, p-value = 0.9804\n",
+            "Regression Test: Slope = 2.9553, p-value = 0.0000\n",
+            "t-test A vs B: t-statistic = -3.7013, p-value = 0.0005\n",
+            "t-test A vs C: t-statistic = -9.5919, p-value = 0.0000\n",
+            "t-test B vs C: t-statistic = -5.3932, p-value = 0.0000\n",
+            "One-Way ANOVA: F-statistic = 43.4408, p-value = 0.0000\n",
+            "ANOVA Test with Four Groups: F-statistic = 53.8764, p-value = 0.0000\n",
+            "Variance Partitioning ANOVA: F-statistic = 26.2802, p-value = 0.0000\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**7. Compare the classical (frequentist) approach to ANOVA with the Bayesian approach. What are the key differences in terms of how they handle uncertainty, parameter estimation, and hypothesis testing?**\n",
+        "\n",
+        "Classical ANOVA, based on the frequentist approach, tests whether there is a significant difference among group means using an F-statistic and p-values. It assumes fixed but unknown population parameters and relies on long-run frequency properties of data. A significant p-value (typically < 0.05) leads to rejecting the null hypothesis, indicating at least one group mean differs. However, it does not provide the probability of hypotheses being true, only whether the observed data is unlikely under the null hypothesis.  \n",
+        "\n",
+        "Bayesian ANOVA, in contrast, estimates the probability distribution of parameters using prior beliefs and observed data. Instead of p-values, it computes posterior distributions and Bayes factors, allowing for probabilistic interpretations. Bayesian methods are more flexible, incorporating prior knowledge and handling small or imbalanced datasets better. Unlike frequentist ANOVA, which provides a binary decision, Bayesian ANOVA gives a full range of possible values for group means and their uncertainties.  \n"
+      ],
+      "metadata": {
+        "id": "wKXLjg_owjjo"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**8.Question: You have two sets of data representing the incomes of two different professions1\n",
+        "V Profession A: [48, 52, 55, 60, 62'\n",
+        "V Profession B: [45, 50, 55, 52, 47] Perform an F-test to determine if the variances of the two professions'\n",
+        "incomes are equal. What are your conclusions based on the F-test?\n",
+        "Task: Use Python to calculate the F-statistic and p-value for the given data.Objective: Gain experience in performing F-tests and interpreting the results in terms of variance comparison.**"
+      ],
+      "metadata": {
+        "id": "LCCWfCYFzSnn"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "from scipy import stats\n",
+        "\n",
+        "profession_a = [48, 52, 55, 60, 62]\n",
+        "profession_b = [45, 50, 55, 52, 47]\n",
+        "variance_a = np.var(profession_a, ddof=1)  # ddof=1 for sample variance\n",
+        "variance_b = np.var(profession_b, ddof=1)\n",
+        "\n",
+        "f_statistic = variance_a / variance_b  # Larger variance in the numeratorf_statistic = variance_a / variance_b  # Larger variance in the numerator\n",
+        "df1 = len(profession_a) - 1  # Degrees of freedom for Profession A\n",
+        "df2 = len(profession_b) - 1  # Degrees of freedom for Profession B\n",
+        "p_value = 1 - stats.f.cdf(f_statistic, df1, df2)\n",
+        "\n",
+        "alpha = 0.05  # Significance level\n",
+        "\n",
+        "if p_value < alpha:\n",
+        "    print(\"Reject the null hypothesis. The variances are significantly different.\")\n",
+        "else:\n",
+        "    print(\"Fail to reject the null hypothesis. The variances are not significantly different.\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hfjam4ll0hC7",
+        "outputId": "d34939de-5ffb-41a7-ecba-4e8980d3fc71"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Fail to reject the null hypothesis. The variances are not significantly different.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**9. Question: Conduct a one-way ANOVA to test whether there are any statistically significant differences in\n",
+        "average heights between three different regions with the following data1\n",
+        "Region A: [160, 162, 165, 158, 164'\n",
+        " Region B: [172, 175, 170, 168, 174'\n",
+        " Region C: [180, 182, 179, 185, 183'\n",
+        "Task: Write Python code to perform the one-way ANOVA and interpret the results.\n",
+        "Objective: Learn how to perform one-way ANOVA using Python and interpret F-statistic and p-value.**"
+      ],
+      "metadata": {
+        "id": "lOn33eAc1cnw"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "import scipy.stats as stats\n",
+        "\n",
+        "# Data for the three regions\n",
+        "region_A = [160, 162, 165, 158, 164]\n",
+        "region_B = [172, 175, 170, 168, 174]\n",
+        "region_C = [180, 182, 179, 185, 183]\n",
+        "\n",
+        "# Perform one-way ANOVA\n",
+        "f_statistic, p_value = stats.f_oneway(region_A, region_B, region_C)\n",
+        "\n",
+        "# Print the results\n",
+        "print(f\"One-Way ANOVA Results:\")\n",
+        "print(f\"F-statistic: {f_statistic:.4f}\")\n",
+        "print(f\"p-value: {p_value:.4f}\")\n",
+        "\n",
+        "# Interpretation of the results\n",
+        "alpha = 0.05  # significance level\n",
+        "if p_value < alpha:\n",
+        "    print(\"Conclusion: There is a statistically significant difference in average heights between the regions.\")\n",
+        "else:\n",
+        "    print(\"Conclusion: No statistically significant difference in average heights between the regions.\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "TtXClILK4kcX",
+        "outputId": "d86e5e4e-1e8c-45bd-ca0c-8d03f1f3d330"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "One-Way ANOVA Results:\n",
+            "F-statistic: 67.8733\n",
+            "p-value: 0.0000\n",
+            "Conclusion: There is a statistically significant difference in average heights between the regions.\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
